@@ -92,14 +92,14 @@ client.connect((err) => {
     });
   });
 
-  //========================= READ FEEDBACK/ REVIEWS AND SHOW (READ)===================================
+  // READ FEEDBACK/ REVIEWS AND SHOW (READ)
   app.get("/reviews", (req, res) => {
     feedbackCollection.find({}).toArray((err, documents) => {
       res.send(documents);
     });
   });
 
-  //========================= READ USER SELECTED SERVICE (READ)===================================
+  //READ USER SELECTED SERVICE (READ)
   app.get("/services/:_id", (req, res) => {
     serviceCollection
       .find({ _id: ObjectId(req.params._id) })
@@ -108,7 +108,7 @@ client.connect((err) => {
       });
   });
 
-  //========================= UPDATE STATUS OF SERVICE(available for Admin Only) ==================
+  // UPDATE STATUS OF SERVICE(available for Admin Only)
   app.patch("/updateServiceStatus/:_id", (req, res) => {
     registrationCollection
       .updateOne(
@@ -123,7 +123,7 @@ client.connect((err) => {
       });
   });
 
-  //==================================== ADD ADMIN =================================================
+  //ADD ADMIN
   app.post("/addAdmin", (req, res) => {
     const newAdmin = req.body;
     adminCollection.insertOne(newAdmin).then((result) => {
@@ -131,7 +131,7 @@ client.connect((err) => {
     });
   });
 
-  //==================================== VERIFY ADMIN LOGIN =========================================
+  // VERIFY ADMIN LOGIN
   app.post("/isAdmin", (req, res) => {
     const email = req.body.email;
     adminCollection.find({ email: email }).toArray((err, admins) => {
